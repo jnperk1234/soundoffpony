@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Little Pony Sound Off! </title>
+ <!--   <link href="https://fonts.googleapis.com/css?family=Princess+Sofia" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Mystery+Quest" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+</head>
+<body>
+    <div class="title">
+        <h1 class="header">My Little Pony Sound Off!!</h1>
+    </div>
+    <!--Keys-->
+    <div class="keys">
+        <!--Rarity-->
+        <div data-key="82" class="key">
+            <kbd>R</kbd>
+            <span class="sound">Rarity</span>
+        </div>
+        <!--Fluttershy-->
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">FlutterShy</span>
+        </div>
+        <!--Pinkie Pie-->
+        <div data-key="80" class="key">
+            <kbd>P</kbd>
+            <span class="sound">Pinkie Pie</span>
+        </div>
+        <!--Twilight Sparkle-->
+        <div data-key="84" class="key">
+            <kbd>T</kbd>
+            <span class="sound">Twilight Sparkle</span>
+        </div>
+        <!--Rainbow Dash-->
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">Rainbow Dash</span>
+        </div>
+        <!--Apple jack-->
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">AppleJack</span>
+        </div>
+        <!--Spike-->
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">Spike</span>
+        </div>
+        <!--Sweetie-->
+        <div data-key="66" class="key">
+            <kbd>B</kbd>
+            <span class="sound">Sweetie Belle</span>
+        </div>
+        <!--Granny Smith-->
+        <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">Granny Smith Apple</span>
+        </div>
+    </div>
+
+ 
+
+   <!--Audio Files-->
+    <audio data-key="82" src="assets/sounds/rarity.wav"></audio>
+    <audio data-key="70" src="assets/sounds/flut.mp3"></audio>
+    <audio data-key="80" src="assets/sounds/pinkie.mp3"></audio>
+    <audio data-key="84" src="assets/sounds/twilspak.mp3"></audio>
+    <audio data-key="68" src="assets/sounds/rain.mp3"></audio>
+    <audio data-key="65" src="assets/sounds/apj.wav"></audio>
+    <audio data-key="83" src="assets/sounds/spike.wav"></audio>
+    <audio data-key="66" src="assets/sounds/sweetie.wav"></audio>
+    <audio data-key="71" src="assets/sounds/granny.wav"></audio>
+
+    <script>
+        
+        function playSound(e){
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);//add animation everytime key is pressed
+            if (!audio) // handle null keys
+            return;
+            audio.currentTime = 0; // allow fast play
+            audio.play();
+            key.classList.add('playing');               
+       }
+        
+
+       function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;//skip it if it's not a transform
+            this.classList.remove('playing');
+            
+       }
+
+       const keys = document.querySelectorAll('.key');
+       keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+      window.addEventListener('keydown',playSound);
+    </script>
+</body>
+</html>
